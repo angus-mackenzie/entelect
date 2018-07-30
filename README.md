@@ -1,37 +1,36 @@
 # Entelect Challenge
 * Saturday 4th August
-* 8:30-15
+* 8:30-15:00
 * Can view the problem when released [here](https://challenge.entelect.co.za)
-* Isango Lab 
+* Online challenge, can compete from anywhere
 
 Register [here](https://challenge.entelect.co.za/portal)
 
 ## Team Name: TBD
 ## Team Members:
-* Fergus Strangways-Dixon
-* Michael Scott
-* Angus Mackenzie
+* [Fergus Strangways-Dixon](https://github.com/fergusdixon)
+* [Michael Scott](https://github.com/michael-ross-scott)
+* [Angus Mackenzie](https://github.com/AngusTheMack)
 
 ## Practice Problem
 *The practice problem should be used by each team to get a feel for the problem
 solving involved in the official challenge. Although the below problem seems trivial, it
 can become an optimization problem with large data sets.*
 
-You are given a map with resource mines denoted by an uppercase alphabetical
-character. Each mine has an associated depo where resources must be delivered to – these are denoted by the corresponding lowercase alphabetical character.
+You are given a map with resource mines denoted by an uppercase alphabetical character. Each mine has an associated depo where resources must be delivered to – these are denoted by the corresponding lowercase alphabetical character.
 
-You are given a number of worker units specified by worker_count which can collect one resource at a time from a mine and deliver it to a depo. A worker unit can carry only one resource at a time. Workers start at position 0, 0 which is the bottom left of
-the map.
+You are given a number of worker units specified by worker_count which can collect one resource at a time from a mine and deliver it to a depo. A worker unit can carry only one resource at a time. Workers start at position 0, 0 which is the bottom left of the map.
 
 Write an algorithm to visit each mine and deliver the resource to its associated depo whilst minimizing distance travelled.
 
 Your score is calculated by the total distance travelled by all workers. You need to minimize this value.
 
-Distance is calculated using the [Manhattan distance formula](https://en.wikipedia.org/wiki/Taxicab_geometry)
+Distance is calculated using the [Manhattan distance formula](https://en.wikipedia.org/wiki/Taxicab_geometry). Also known as *taxicab geometry* - shown below:
+![Taxicab Gemoetry](img/manhattandist.png)
 **Constraints**
-0 < map_width < 100000
-0 < map_height < 100000
-0 < worker_count < 10000
+* 0 < map_width < 100000
+* 0 < map_height < 100000
+* 0 < worker_count < 10000
 
 ## Example I/O
 ### Example 1 Input
@@ -79,3 +78,5 @@ The total Manhattan distance travelled is 14, and the total score is 14.
 ## Questions / Queries
 Email: challenge@entelect.co.za
 Forum [https://forum.entelect.co.za](https://forum.entelect.co.za)
+
+## How To 
