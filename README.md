@@ -9,7 +9,7 @@ Register [here](https://challenge.entelect.co.za/portal)
 ## Team Name: TBD
 ## Team Members:
 * [Fergus Strangways-Dixon](https://github.com/fergusdixon)
-* [Michael Scott](https://github.com/michael-ross-scott)
+* [Joshua Benjamin](https://github.com/joshbenjamin)
 * [Angus Mackenzie](https://github.com/AngusTheMack)
 
 ## Practice Problem
