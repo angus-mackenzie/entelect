@@ -41,9 +41,9 @@ public class MapReader{
             char[] line = lines.get(i).toCharArray();
             for(int j = 0; j < line.length;j++){
                 if(Character.isUpperCase(line[j])){
-                    mines.add(new Point(Math.abs(i-10),j));
+                    mines.add(new Point(line[j],Math.abs(i-10),j));
                 }else if(Character.isLowerCase(line[j])){
-                    depots.add(new Point(Math.abs(i-10),j));
+                    depots.add(new Point(line[j],Math.abs(i-10),j));
                 }
             }
 
