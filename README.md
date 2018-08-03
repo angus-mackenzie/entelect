@@ -6,7 +6,8 @@
 
 Register [here](https://challenge.entelect.co.za/portal)
 
-## Team Name: TBD
+## Team Name: *Alexa, Play Despacito*
+Team code: Alexa, Play Despacito-8403
 ## Team Members:
 * [Fergus Strangways-Dixon](https://github.com/fergusdixon)
 * [Joshua Benjamin](https://github.com/joshbenjamin)
