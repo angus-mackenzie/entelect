@@ -9,6 +9,6 @@ public class Controller{
             int dist = (int)(Math.abs(origin.getX() - dest.getX()) + Math.abs(origin.getY() - dest.getY()));
             return dist;
 
-    }
+        }
 
 }
