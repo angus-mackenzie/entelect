@@ -1,4 +1,5 @@
 public class Point{
+    char id;
     int x;
     int y;
     
@@ -7,12 +8,15 @@ public class Point{
         this.y = 0;
     }
 
-    public Point(int x, int y){
+    public Point(char id, int x, int y){
+        this.id = id;
         this.x = x;
         this.y = y;
     }
 
-
+    public char getID(){
+        return id;
+    }
     public int getX(){
         return x;
     }
@@ -22,6 +26,6 @@ public class Point{
 
     @Override
     public String toString(){
-        return "["+x+","+y+"]";
+        return id+"["+x+","+y+"]";
     }
 }
