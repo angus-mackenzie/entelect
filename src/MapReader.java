@@ -31,14 +31,13 @@ public class MapReader{
         }
         mines = new ArrayList<Point>();
         depots = new ArrayList<Point>();
-        for(int i = 0; i < lines.size(); i++){
+        for(int i = lines.size()-1; i >0; i--){
             char[] line = lines.get(i).toCharArray();
             for(int j = 0; j < line.length;j++){
                 if(Character.isUpperCase(line[j])){
-                    //mines
-                    mines.add(new Point(i,j));
+                    mines.add(new Point(Math.abs(i-10),j));
                 }else if(Character.isLowerCase(line[j])){
-                    depots.add(new Point(i,j));
+                    depots.add(new Point(Math.abs(i-10),j));
                 }
             }
 
