@@ -9,35 +9,36 @@ public class MapReader{
     int dimensions = 0;
     int numberOfWorkers = 0;
     String map ="";
-    boolean first = True;
+    boolean first = true;
     /**
      * @param String the filename of the map
      */
-    ArrayList<String> lines = new ArrayList<string>();
-    ArrayList<Integer,Integer> mines = new ArrayList<Integer,Integer>();
-    ArrayList<Integer,Integer> depots = new ArrayList<Integer,Integer>();
+    ArrayList<String> lines = new ArrayList<String>();
+    ArrayList[][] mines;// = new ArrayList[][]();
+    ArrayList[][] depots;// = new ArrayList[][]();
     public MapReader(String mapFileName) throws Exception{
         Scanner mapScanner = new Scanner(new File(mapFileName));
         while(mapScanner.hasNext()){
             if(first){
                 //first line
                 numberOfWorkers = mapScanner.nextInt();
-                first = False;
+                first = false;
             }else{
                 lines.add(mapScanner.nextLine());
                 dimensions++;
                 
             }
         }
-
+        mines = new ArrayList[dimensions][dimensions];
+        depots = new ArrayList[dimensions][dimensions];
         for(int i = 0; i < lines.size(); i++){
             char[] line = lines.get(i).toCharArray();
             for(int j = 0; j < line.length;j++){
                 if(Character.isUpperCase(line[j])){
                     //mines
-                    mines.add(i,j);
+                    mines[i][j].add("Mine");
                 }else if(Character.isLowerCase(line[j])){
-                    depots.add(i,j);
+                    depots[i][j].add("depots");
                 }
             }
 
@@ -47,11 +48,11 @@ public class MapReader{
     public int getSize(){
         return dimensions;
     }
-    public ArrayList<Integer,Integer> getMines(){
+    public ArrayList[][] getMines(){
         return mines;
     }
 
-    public ArrayList<Integer,Integer> getDepots(){
+    public ArrayList[][] getDepots(){
         return depots;
     }
     public int getNumberOfWorkers(){
