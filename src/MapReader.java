@@ -14,8 +14,8 @@ public class MapReader{
      * @param String the filename of the map
      */
     ArrayList<String> lines = new ArrayList<String>();
-    ArrayList[][] mines;// = new ArrayList[][]();
-    ArrayList[][] depots;// = new ArrayList[][]();
+    ArrayList<Point> mines;// = new ArrayList[][]();
+    ArrayList<Point> depots;// = new ArrayList[][]();
     public MapReader(String mapFileName) throws Exception{
         Scanner mapScanner = new Scanner(new File(mapFileName));
         while(mapScanner.hasNext()){
@@ -29,16 +29,16 @@ public class MapReader{
                 
             }
         }
-        mines = new ArrayList[dimensions][dimensions];
-        depots = new ArrayList[dimensions][dimensions];
+        mines = new ArrayList<Point>();
+        depots = new ArrayList<Point>();
         for(int i = 0; i < lines.size(); i++){
             char[] line = lines.get(i).toCharArray();
             for(int j = 0; j < line.length;j++){
                 if(Character.isUpperCase(line[j])){
                     //mines
-                    mines[i][j].add("Mine");
+                    mines.add(new Point(i,j));
                 }else if(Character.isLowerCase(line[j])){
-                    depots[i][j].add("depots");
+                    depots.add(new Point(i,j));
                 }
             }
 
@@ -48,11 +48,11 @@ public class MapReader{
     public int getSize(){
         return dimensions;
     }
-    public ArrayList[][] getMines(){
+    public ArrayList<Point> getMines(){
         return mines;
     }
 
-    public ArrayList[][] getDepots(){
+    public ArrayList<Point> getDepots(){
         return depots;
     }
     public int getNumberOfWorkers(){
