@@ -4,7 +4,7 @@
 * Can view the problem when released [here](https://challenge.entelect.co.za)
 * Online challenge, can compete from anywhere
 
-Register [here](https://challenge.entelect.co.za/portal)
+Practice  [here](https://challenge.entelect.co.za/portal/university/practice)
 
 ## Team Name: *Alexa, Play Despacito*
 Team code: Alexa, Play Despacito-8403
@@ -28,14 +28,26 @@ Your score is calculated by the total distance travelled by all workers. You nee
 
 Distance is calculated using the [Manhattan distance formula](https://en.wikipedia.org/wiki/Taxicab_geometry). Also known as *taxicab geometry* - shown below:
 ![Taxicab Gemoetry](img/manhattandist.png)
+
+On the challenge website the Manhattan distance formula is outlined as:
+$$ 
+Given: A = [X1,Y1] and B = [X2,Y2]
+$$
+$$
+Distance(A,B) = (abs(X2-X1)+abs(Y2-Y1))
+$$
 **Constraints**
 * 0 < map_width < 100000
 * 0 < map_height < 100000
 * 0 < worker_count < 10000
+* 0 < worker_count <= 20
+* 0 < num_mines <= 26
+* 0 < num_depos <= 26
 
 ## Example I/O
 ### Example 1 Input
 ```
+
 1
 ###b#
 #####
@@ -46,7 +58,9 @@ a####
 The first line indicates the number of worker units.
 
 The following lines represent the map.
+
 **Uppercase** characters are mines.
+
 **Lowercase** characters are depos for the associated mines.
 
 **Example 1 Output**
