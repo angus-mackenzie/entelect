@@ -19,7 +19,7 @@ public class MapReader{
             }
             //otherwise we read the line in
             Scanner lineReader = new Scanner(mapReader.nextLine());
-            while(lineReader.next()){
+            while(lineReader.hasNext()){
                 System.out.println("This is a char: "+lineReader.next());
             }
             
