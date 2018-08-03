@@ -2,6 +2,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.*;
 /**
+ * @author Angus Mackenzie
+ * @version 19:30PM
  * Takes in the path to a map, and reads it in. 
  * Allocating coordinates to each char in the map
  */
@@ -24,13 +26,17 @@ public class MapReader{
                 numberOfWorkers = mapScanner.nextInt();
                 first = false;
             }else{
+                //otherwise add it to the array of lines
                 lines.add(mapScanner.nextLine());
                 dimensions++;
                 
             }
         }
+        //create arrays for mines and epots
         mines = new ArrayList<Point>();
         depots = new ArrayList<Point>();
+
+        //Populate them with data from 0,0
         for(int i = lines.size()-1; i >0; i--){
             char[] line = lines.get(i).toCharArray();
             for(int j = 0; j < line.length;j++){
@@ -44,16 +50,29 @@ public class MapReader{
         }
     }
 
-    public int getSize(){
+    /**
+     * return the dimensions of the map
+     */
+    public int getDimensions(){
         return dimensions;
     }
+    /**
+     * returns the mines in an arrayList
+     */
     public ArrayList<Point> getMines(){
         return mines;
     }
 
+    /**
+     * returns the depots 
+     */
     public ArrayList<Point> getDepots(){
         return depots;
     }
+
+    /**
+     * return the number of workers specified
+     */
     public int getNumberOfWorkers(){
         return numberOfWorkers;
     }
