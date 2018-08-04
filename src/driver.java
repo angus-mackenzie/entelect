@@ -4,16 +4,12 @@ public class driver{
     public static void main(String[] args){
         try{
             MapReader mr = new MapReader("maps/map_1.input");
-            while(mr.minesList.size()!=0 || mr.workersHaveResources()){
-                System.out.println(mr.minesList);
+            while(minesHaveResources(mr.minesList) || mr.workersHaveResources()){
                 for(Worker worker: mr.workers){
                     if(worker.path==0) {//need to move to a factory
                         Factory fact = nearestValid(worker, mr.minesList,mr.factoryList, mr);
                         if (fact.getClass().getSimpleName().equals("Mine")) {
                             ((Mine)fact).resources--;
-                            if (((Mine)fact).resources == 0){
-                                mr.minesList.remove(fact);
-                            }
                         }
                         worker.moveToFactory(fact);
                     }else if(worker.path==1){//arrived at a factory
@@ -22,7 +18,6 @@ public class driver{
                             worker.removeElement(tag);
                         }else{
                             worker.addElement(tag);
-
                         }
                     }
                     worker.path--;
@@ -33,6 +28,16 @@ public class driver{
             System.out.println("No file");
             e.printStackTrace();
         }
+    }
+
+    private static boolean minesHaveResources(ArrayList<Mine> minesList) {
+        for (Mine mine :
+                minesList) {
+            if (mine.resources > 0) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static int calculateDistance (Factory origin, Factory dest){
@@ -46,7 +51,7 @@ public class driver{
         int distance = 1000;
         if (worker.hasCapacity()) {
             for (Mine mine: mines) {
-                if (! worker.hasElement(mine.tag)) {
+                if (! worker.hasElement(mine.tag) && mine.resources > 0) {
                     if (nearest == null) {
                         nearest = mine;
                         distance = calculateDistance(worker.currentFactory, mine);
@@ -78,8 +83,12 @@ public class driver{
 
         if (nearest == null) {
             System.out.println("Ya dun goofed");
+            System.exit(1);
         }
-
+        if (nearest.equals(worker.currentFactory)) {
+            System.out.println("stuck at: " + nearest);
+            System.out.println(worker.pathTravelled + ", " + mr.minesList);
+        }
         return nearest;
     }
 
