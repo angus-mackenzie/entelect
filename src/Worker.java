@@ -8,6 +8,9 @@ public class Worker{
     Factory currentFactory;
     String pathTravelled;
     String workerName ="";
+
+    ArrayList<String> elementsCarrying;
+
     public Worker(String name, Factory start){
         workerName = name;
         distanceTravelled = 0;
