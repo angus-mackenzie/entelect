@@ -8,18 +8,18 @@ import java.io.*;
  * Allocating coordinates to each char in the map
  */
 public class MapReader{
-    int dimensions = 0;
-    int numberOfWorkers = 0;
-    String map ="";
-    boolean first = true;
-    int mapHeight =         0;
-    int mapWidth = 0;
-    int minerCount = 0;
-    int excavatorCount = 0;
-    int haulerCount = 0;
-    int mines = 0;
-    int facts = 0;
-    int budget = 0;
+    public int dimensions = 0;
+    public int numberOfWorkers = 0;
+    public String map ="";
+    public boolean first = true;
+    public int mapHeight =         0;
+    public int mapWidth = 0;
+    public int minerCount = 0;
+    public int excavatorCount = 0;
+    public int haulerCount = 0;
+    public int mines = 0;
+    public int facts = 0;
+    public int budget = 0;
     /**
      * @param String the filename of the map
      */
