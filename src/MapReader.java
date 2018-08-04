@@ -12,12 +12,6 @@ public class MapReader{
     public int mapHeight = 0;
     public int mapWidth = 0;
 
-    //public int minerCount = 0;
-        //public ArrayList<Worker> miners;
-    //public int excavatorCount = 0;
-        //public ArrayList<Worker> excavators;
-    //public int haulerCount = 0;
-        //public ArrayList<Worker> haulers;
     public ArrayList<Worker> workers = new ArrayList<>();
 
     public int mines = 0;
