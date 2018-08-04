@@ -12,6 +12,14 @@ public class MapReader{
     int numberOfWorkers = 0;
     String map ="";
     boolean first = true;
+    int mapHeight =         0;
+    int mapWidth = 0;
+    int minerCount = 0;
+    int excavatorCount = 0;
+    int haulerCount = 0;
+    int mines = 0;
+    int facts = 0;
+    int budget = 0;
     /**
      * @param String the filename of the map
      */
@@ -24,14 +32,14 @@ public class MapReader{
             if(first){
                 //first line
                 String[] firstLine = mapScanner.nextLine().split(" ");
-                int mapHeight = firstLine[0];
-                int mapWidth = firstLine[1];
-                int minerCount = firstLine[2];
-                int excavatorCount = firstLine[3];
-                int haulerCount = firstLine[4];
-                int mines = firstLine[5];
-                int facts = firstLine[6];
-                int budget = firstLine[7];
+                mapHeight = Integer.parseInt(firstLine[0]);
+                mapWidth = Integer.parseInt(firstLine[1]);
+                minerCount = Integer.parseInt(firstLine[2]);
+                excavatorCount = Integer.parseInt(firstLine[3]);
+                haulerCount = Integer.parseInt(firstLine[4]);
+                mines = Integer.parseInt(firstLine[5]);
+                facts = Integer.parseInt(firstLine[6]);
+                budget = Integer.parseInt(firstLine[7]);
                 first = false;
             }else{
                 //otherwise add it to the array of lines
