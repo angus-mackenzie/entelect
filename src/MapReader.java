@@ -16,8 +16,8 @@ public class MapReader{
      * @param String the filename of the map
      */
     ArrayList<String> lines = new ArrayList<String>();
-    ArrayList<Point> mines;// = new ArrayList[][]();
-    ArrayList<Point> depots;// = new ArrayList[][]();
+    ArrayList<Factory> mines;// = new ArrayList[][]();
+    ArrayList<Factory> depots;// = new ArrayList[][]();
     public MapReader(String mapFileName) throws Exception{
         Scanner mapScanner = new Scanner(new File(mapFileName));
         while(mapScanner.hasNext()){
@@ -33,21 +33,21 @@ public class MapReader{
             }
         }
         //create arrays for mines and epots
-        mines = new ArrayList<Point>();
-        depots = new ArrayList<Point>();
+        mines = new ArrayList<Factory>();
+        depots = new ArrayList<Factory>();
 
         //Populate them with data from 0,0
-        for(int i = lines.size()-1; i >0; i--){
-            char[] line = lines.get(i).toCharArray();
-            for(int j = 0; j < line.length;j++){
-                if(Character.isUpperCase(line[j])){
-                    mines.add(new Point(line[j],Math.abs(i-10),j));
-                }else if(Character.isLowerCase(line[j])){
-                    depots.add(new Point(line[j],Math.abs(i-10),j));
-                }
-            }
+        // for(int i = lines.size()-1; i >0; i--){
+        //     char[] line = lines.get(i).toCharArray();
+        //     for(int j = 0; j < line.length;j++){
+        //         if(Character.isUpperCase(line[j])){
+        //             mines.add(new Factory(line[j],Math.abs(i-10),j));
+        //         }else if(Character.isLowerCase(line[j])){
+        //             depots.add(new Factory(line[j],Math.abs(i-10),j));
+        //         }
+        //     }
 
-        }
+        // }
     }
 
     /**
@@ -59,14 +59,14 @@ public class MapReader{
     /**
      * returns the mines in an arrayList
      */
-    public ArrayList<Point> getMines(){
+    public ArrayList<Factory> getMines(){
         return mines;
     }
 
     /**
      * returns the depots 
      */
-    public ArrayList<Point> getDepots(){
+    public ArrayList<Factory> getDepots(){
         return depots;
     }
 

@@ -4,9 +4,9 @@ public class Controller{
 
 	}
 
-	public int calculateDistance (Point origin, Point dest){
+	public int calculateDistance (Factory origin, Factory dest){
 
-            int dist = (int)(Math.abs(origin.getX() - dest.getX()) + Math.abs(origin.getY() - dest.getY()));
+            int dist = (int)(Math.abs(origin.x - dest.x) + Math.abs(origin.y - dest.y));
             return dist;
 
         }
