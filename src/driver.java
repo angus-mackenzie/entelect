@@ -6,7 +6,7 @@ public class driver{
     public static void main(String[] args){
         int budget = 0;
         try{
-            MapReader mr = new MapReader("maps/map_3.input");
+            MapReader mr = new MapReader("maps/map_5.input");
             budget -= mr.workers.size();
             while(mr.minesList.size() != 0 || mr.workersHaveResources()){
                 for(Worker worker: mr.workers){
@@ -47,7 +47,7 @@ public class driver{
                 }
             }
 
-            BufferedWriter writer = new BufferedWriter(new FileWriter("map3_result.txt"));
+            BufferedWriter writer = new BufferedWriter(new FileWriter("map5_result.txt"));
             for (Worker worker :
                     mr.workers) {
                 writer.write(worker.printPath() + "\n");
