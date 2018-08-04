@@ -1,3 +1,5 @@
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.util.*;
 
 public class driver{
@@ -7,37 +9,47 @@ public class driver{
             while(mr.minesList.size() != 0 || mr.workersHaveResources()){
                 for(Worker worker: mr.workers){
                     if (worker.active) {
-                        if (worker.path == 0) {//need to move to a factory
+                        if (worker.path <= 0) {//need to move to a factory
+                            String tag = worker.currentFactory.tag;
+
+                            // Drop off or pick up
+                            if (tag != null) {
+                                if (lowercase(tag)) {
+                                    worker.removeElement(tag);
+                                } else {
+                                    worker.addElement(tag);
+                                }
+                            }
+
+                            // See where to go
                             Factory fact = nearestValid(worker, mr.minesList, mr.factoryList, mr);
                             if (fact == null) {
                                 worker.active = false;
                                 continue;
                             }
+
+                            // Claim resource
                             if (fact.getClass().getSimpleName().equals("Mine")) {
                                 ((Mine) fact).resources--;
                                 if (((Mine) fact).resources == 0) {
                                     mr.minesList.remove(fact);
                                 }
                             }
+
+                            // Sets destination
                             worker.moveToFactory(fact);
-                        }
-                        if (worker.path == 1) {//arrived at a factory
-                            String tag = worker.currentFactory.tag;
-                            if (lowercase(tag)) {
-                                worker.removeElement(tag);
-                            } else {
-                                worker.addElement(tag);
-                            }
                         }
                         worker.path--;
                     }
                 }
             }
 
+            BufferedWriter writer = new BufferedWriter(new FileWriter("map5_result.txt"));
             for (Worker worker :
                     mr.workers) {
-                System.out.println(worker.printPath());
+                writer.write(worker.printPath() + "\n");
             }
+            writer.close();
 
         }catch(Exception e){
             System.out.println("No file");
