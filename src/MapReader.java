@@ -8,8 +8,6 @@ import java.io.*;
  * Allocating coordinates to each char in the map
  */
 public class MapReader{
-    public int dimensions = 0;
-    public int numberOfWorkers = 0;
     public boolean first = true;
     public int mapHeight = 0;
     public int mapWidth = 0;
