@@ -60,6 +60,6 @@ public class Worker{
 
     @Override
     public String toString() {
-        return super.toString() + " at: " + currentFactory.index + " Bag: " + elementsCarrying;
+        return super.toString() + " at: " + currentFactory.index + " Bag: " + elementsCarrying + " path: " + path + " active: " + active;
     }
 }

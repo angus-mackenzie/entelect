@@ -51,7 +51,10 @@ public class driver{
 
                             // Sets destination
                             System.out.println(mr.minesList);
-                            System.out.println(mr.workers);
+                            for (Worker w :
+                                    mr.workers) {
+                                System.out.println(mr.workers.indexOf(w) + ": " + w);
+                            }
                             System.out.println("moving " + mr.workers.indexOf(worker) + " to " + fact.index);
                             worker.moveToFactory(fact);
                         }
@@ -168,6 +171,9 @@ public class driver{
         if (one.getClass().getSimpleName().equals("Factory")) {
             List<Factory> list= factHash.get(one.tag);
             for (Factory fac : list) {
+                if(one.equals(fac)) {
+                    continue;
+                }
                 if (oneToFac == -1) {
                     oneToFac = calculateDistance(one, fac);
                 }
@@ -181,6 +187,9 @@ public class driver{
         if (two != null && two.getClass().getSimpleName().equals("Factory")) {
             List<Factory> list= factHash.get(two.tag);
             for (Factory fac : list) {
+                if(two.equals(fac)) {
+                    continue;
+                }
                 if (twoToFac == -1) {
                     twoToFac = calculateDistance(two, fac);
                 }
@@ -194,6 +203,9 @@ public class driver{
         if (three != null && three.getClass().getSimpleName().equals("Factory")) {
             List<Factory> list= factHash.get(three.tag);
             for (Factory fac : list) {
+                if(three.equals(fac)) {
+                    continue;
+                }
                 if (threeToFac == -1) {
                     threeToFac = calculateDistance(three, fac);
                 }
@@ -219,6 +231,7 @@ public class driver{
         if ((threeToFac < oneToFac) && (threeToFac < twoToFac && twoToFac != -1)) {
             return three;
         }
+
 
         return one;
     }
