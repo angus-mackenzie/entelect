@@ -10,11 +10,11 @@ public class Factory{
         this.y = 0;
     }
 
-    public Factory(int index, String tag, int x, int y){
-        this.index = index;
+    public Factory(String index, String tag, String x, String y){
+        this.index = Integer.parseInt(index);
         this.tag = tag;
-        this.x = x;
-        this.y = y;
+        this.x = Integer.parseInt(x);
+        this.y = Integer.parseInt(y);
     }
 
     @Override

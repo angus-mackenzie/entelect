@@ -24,8 +24,8 @@ public class MapReader{
      * @param String the filename of the map
      */
     ArrayList<String> lines = new ArrayList<String>();
-    ArrayList<Factory> mines;// = new ArrayList[][]();
-    ArrayList<Factory> depots;// = new ArrayList[][]();
+    ArrayList<Mine> minesList;// = new ArrayList[][]();
+    ArrayList<Factory> factoryList;// = new ArrayList[][]();
     public MapReader(String mapFileName) throws Exception{
         Scanner mapScanner = new Scanner(new File(mapFileName));
         while(mapScanner.hasNext()){
@@ -42,24 +42,13 @@ public class MapReader{
                 budget = Integer.parseInt(firstLine[7]);
                 first = false;
             }else{
-                //otherwise add it to the array of lines
-                lines.add(mapScanner.nextLine());
-                dimensions++;
-                
-            }
-        }
-        //create arrays for mines and epots
-        mines = new ArrayList<Factory>();
-        depots = new ArrayList<Factory>();
-
-        //Populate them with data from 0,0
-        for(int i = lines.size()-1; i >0; i--){
-            char[] line = lines.get(i).toCharArray();
-            for(int j = 0; j < line.length;j++){
-                if(Character.isUpperCase(line[j])){
-                    mines.add(new Point(line[j],Math.abs(i-10),j));
-                }else if(Character.isLowerCase(line[j])){
-                    depots.add(new Point(line[j],Math.abs(i-10),j));
+                String[] line = mapScanner.nextLine().split(" ");
+                if (line.length == 5) {
+                    // Mine
+                    minesList.add(new Mine(line[0], line[1], line[2], line[3], line[4]));
+                } else {
+                    // Factory
+                    factoryList.add(new Factory(line[0], line[1], line[2], line[3]));
                 }
             }
         }
@@ -75,14 +64,14 @@ public class MapReader{
      * returns the mines in an arrayList
      */
     public ArrayList<Factory> getMines(){
-        return mines;
+        return minesList;
     }
 
     /**
      * returns the depots 
      */
     public ArrayList<Factory> getDepots(){
-        return depots;
+        return factoryList;
     }
 
     /**
