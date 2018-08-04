@@ -12,8 +12,41 @@ public class driver{
         }
     }
 
-    public int calculateDistance (Factory origin, Factory dest){
+    public static int calculateDistance (Factory origin, Factory dest){
         int dist = (int)(Math.abs(origin.x - dest.x) + Math.abs(origin.y - dest.y));
         return dist;
+    }
+
+    private static Factory nearestValid(Worker worker, ArrayList<Mine> mines, ArrayList<Factory> factories)
+    {
+        Factory nearest = null;
+        int distance = 1000;
+        for (Mine mine: mines) {
+            if (nearest == null) {
+                nearest = mine;
+                distance = calculateDistance(worker.currentFactory, mine);
+                continue;
+            }
+            int newDistance = calculateDistance(worker.currentFactory, mine);
+            if (newDistance < distance) {
+                nearest = mine;
+                distance = newDistance;
+            }
+        }
+
+        for (Factory factory: factories) {
+            if (nearest == null) {
+                nearest = factory;
+                distance = calculateDistance(worker.currentFactory, factory);
+                continue;
+            }
+            int newDistance = calculateDistance(worker.currentFactory, factory);
+            if (newDistance < distance) {
+                nearest = factory;
+                distance = newDistance;
+            }
+        }
+
+        return nearest;
     }
 }
