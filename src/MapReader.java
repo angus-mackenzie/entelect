@@ -11,9 +11,15 @@ public class MapReader{
     public boolean first = true;
     public int mapHeight = 0;
     public int mapWidth = 0;
-    public int minerCount = 0;
-    public int excavatorCount = 0;
-    public int haulerCount = 0;
+
+    //public int minerCount = 0;
+        //public ArrayList<Worker> miners;
+    //public int excavatorCount = 0;
+        //public ArrayList<Worker> excavators;
+    //public int haulerCount = 0;
+        //public ArrayList<Worker> haulers;
+    public ArrayList<Worker> workers = new ArrayList<>();
+
     public int mines = 0;
     public int facts = 0;
     public long budget = 0;
@@ -23,15 +29,25 @@ public class MapReader{
 
     public MapReader(String mapFileName) throws Exception{
         Scanner mapScanner = new Scanner(new File(mapFileName));
+        Factory startFactory = new Factory();
         while(mapScanner.hasNext()){
             if(first){
                 //first line
                 String[] firstLine = mapScanner.nextLine().split(" ");
                 mapHeight = Integer.parseInt(firstLine[0]);
                 mapWidth = Integer.parseInt(firstLine[1]);
-                minerCount = Integer.parseInt(firstLine[2]);
-                excavatorCount = Integer.parseInt(firstLine[3]);
-                haulerCount = Integer.parseInt(firstLine[4]);
+                //minerCount = Integer.parseInt(firstLine[2]);
+                for (int i = 0; i < Integer.parseInt(firstLine[2]); i++) {
+                    workers.add(new Worker("Miner", startFactory, 1));
+                }
+                //excavatorCount = Integer.parseInt(firstLine[3]);
+                for (int i = 0; i < Integer.parseInt(firstLine[2]); i++) {
+                    workers.add(new Worker("Excavator", startFactory, 3));
+                }
+                //haulerCount = Integer.parseInt(firstLine[4]);
+                for (int i = 0; i < Integer.parseInt(firstLine[2]); i++) {
+                    workers.add(new Worker("Hauler", startFactory, 5));
+                }
                 mines = Integer.parseInt(firstLine[5]);
                 facts = Integer.parseInt(firstLine[6]);
                 budget = Long.parseLong(firstLine[7]);
