@@ -16,14 +16,22 @@ public class MapReader{
      * @param String the filename of the map
      */
     ArrayList<String> lines = new ArrayList<String>();
-    ArrayList<Point> mines;// = new ArrayList[][]();
-    ArrayList<Point> depots;// = new ArrayList[][]();
+    ArrayList<Factory> mines;// = new ArrayList[][]();
+    ArrayList<Factory> depots;// = new ArrayList[][]();
     public MapReader(String mapFileName) throws Exception{
         Scanner mapScanner = new Scanner(new File(mapFileName));
         while(mapScanner.hasNext()){
             if(first){
                 //first line
-                numberOfWorkers = mapScanner.nextInt();
+                String[] firstLine = mapScanner.nextLine().split(" ");
+                int mapHeight = firstLine[0];
+                int mapWidth = firstLine[1];
+                int minerCount = firstLine[2];
+                int excavatorCount = firstLine[3];
+                int haulerCount = firstLine[4];
+                int mines = firstLine[5];
+                int facts = firstLine[6];
+                int budget = firstLine[7];
                 first = false;
             }else{
                 //otherwise add it to the array of lines
@@ -33,8 +41,8 @@ public class MapReader{
             }
         }
         //create arrays for mines and epots
-        mines = new ArrayList<Point>();
-        depots = new ArrayList<Point>();
+        mines = new ArrayList<Factory>();
+        depots = new ArrayList<Factory>();
 
         //Populate them with data from 0,0
         for(int i = lines.size()-1; i >0; i--){
@@ -58,14 +66,14 @@ public class MapReader{
     /**
      * returns the mines in an arrayList
      */
-    public ArrayList<Point> getMines(){
+    public ArrayList<Factory> getMines(){
         return mines;
     }
 
     /**
      * returns the depots 
      */
-    public ArrayList<Point> getDepots(){
+    public ArrayList<Factory> getDepots(){
         return depots;
     }
 

@@ -9,7 +9,7 @@ JFLAGS = -g
 
 #typing 'make' will invoke the first target entry in the makefile
 
-default: driver.class MapReader.class Point.class Worker.class
+default: driver.class MapReader.class Factory.class Worker.class
 
 #This lays out the parameters to build a class, lays out the dependency between .class and .java
 #Could be streamlined by using other variables and a loop, but 
@@ -17,8 +17,8 @@ driver.class: driver.java
 	$(JCC) $(JFLAGS) driver.java
 MapReader.class: MapReader.java
 	$(JCC) $(JFLAGS) MapReader.java
-Point.class: Point.java
-	$(JCC) $(JFLAGS) Point.java
+Factory.class: Factory.java
+	$(JCC) $(JFLAGS) Factory.java
 Worker.class: Worker.java
 	$(JCC) $(JFLAGS) Worker.java
 
