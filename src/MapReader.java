@@ -10,9 +10,8 @@ import java.io.*;
 public class MapReader{
     public int dimensions = 0;
     public int numberOfWorkers = 0;
-    public String map ="";
     public boolean first = true;
-    public int mapHeight =         0;
+    public int mapHeight = 0;
     public int mapWidth = 0;
     public int minerCount = 0;
     public int excavatorCount = 0;
@@ -20,12 +19,10 @@ public class MapReader{
     public int mines = 0;
     public int facts = 0;
     public int budget = 0;
-    /**
-     * @param String the filename of the map
-     */
-    ArrayList<String> lines = new ArrayList<String>();
-    ArrayList<Mine> minesList;// = new ArrayList[][]();
-    ArrayList<Factory> factoryList;// = new ArrayList[][]();
+
+    public ArrayList<Mine> minesList = new ArrayList<>();
+    public ArrayList<Factory> factoryList = new ArrayList<>();
+
     public MapReader(String mapFileName) throws Exception{
         Scanner mapScanner = new Scanner(new File(mapFileName));
         while(mapScanner.hasNext()){
@@ -52,32 +49,5 @@ public class MapReader{
                 }
             }
         }
-    }
-
-    /**
-     * return the dimensions of the map
-     */
-    public int getDimensions(){
-        return dimensions;
-    }
-    /**
-     * returns the mines in an arrayList
-     */
-    public ArrayList<Factory> getMines(){
-        return minesList;
-    }
-
-    /**
-     * returns the depots 
-     */
-    public ArrayList<Factory> getDepots(){
-        return factoryList;
-    }
-
-    /**
-     * return the number of workers specified
-     */
-    public int getNumberOfWorkers(){
-        return numberOfWorkers;
     }
 }
