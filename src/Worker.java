@@ -7,6 +7,7 @@ public class Worker{
     int distanceTravelled;
     int carryCapacity;
     int path;
+    boolean active = true;
     Factory currentFactory;
     String pathTravelled;
     String workerName ="";

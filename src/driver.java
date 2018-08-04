@@ -4,23 +4,30 @@ public class driver{
     public static void main(String[] args){
         try{
             MapReader mr = new MapReader("maps/map_1.input");
-            while(minesHaveResources(mr.minesList) || mr.workersHaveResources()){
+            while(mr.minesList.size() != 0 || mr.workersHaveResources()){
+                System.out.println(mr.minesList);
                 for(Worker worker: mr.workers){
-                    if(worker.path==0) {//need to move to a factory
-                        Factory fact = nearestValid(worker, mr.minesList,mr.factoryList, mr);
-                        if (fact.getClass().getSimpleName().equals("Mine")) {
-                            ((Mine)fact).resources--;
+                    if (worker.active) {
+                        if (worker.path == 0) {//need to move to a factory
+                            Factory fact = nearestValid(worker, mr.minesList, mr.factoryList, mr);
+                            if (fact.getClass().getSimpleName().equals("Mine")) {
+                                ((Mine) fact).resources--;
+                                if (((Mine) fact).resources == 0) {
+                                    mr.minesList.remove(fact);
+                                }
+                            }
+                            worker.moveToFactory(fact);
                         }
-                        worker.moveToFactory(fact);
-                    }else if(worker.path==1){//arrived at a factory
-                        String tag = worker.currentFactory.tag;
-                        if(lowercase(tag)){
-                            worker.removeElement(tag);
-                        }else{
-                            worker.addElement(tag);
+                        if (worker.path == 1) {//arrived at a factory
+                            String tag = worker.currentFactory.tag;
+                            if (lowercase(tag)) {
+                                worker.removeElement(tag);
+                            } else {
+                                worker.addElement(tag);
+                            }
                         }
+                        worker.path--;
                     }
-                    worker.path--;
                 }
             }
 
@@ -82,13 +89,9 @@ public class driver{
         }
 
         if (nearest == null) {
-            System.out.println("Ya dun goofed");
-            System.exit(1);
+            worker.active = false;
         }
-        if (nearest.equals(worker.currentFactory)) {
-            System.out.println("stuck at: " + nearest);
-            System.out.println(worker.pathTravelled + ", " + mr.minesList);
-        }
+
         return nearest;
     }
 
