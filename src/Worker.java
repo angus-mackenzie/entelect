@@ -1,3 +1,7 @@
+
+import java.util.ArrayList;
+
+
 public class Worker{
     
     int distanceTravelled;
@@ -9,6 +13,9 @@ public class Worker{
         distanceTravelled = 0;
         currentFactory = start;
         pathTravelled = "";
+        capacity = carryCapacity;
+
+        elementsCarrying = new ArrayList<String>();
     }
 
     public void moveToFactory(Factory dest){
@@ -21,6 +28,18 @@ public class Worker{
     public int calculateDistance (Factory origin, Factory dest){
         int dist = (int)(Math.abs(origin.getX() - dest.getX()) + Math.abs(origin.getY() - dest.getY()));
         return dist;
+    }
+
+    public void addElement(String tag){
+        elementsCarrying.add(tag);
+    }
+
+    public void removeElement(String tag){
+        elementsCarrying.remove(tag);
+    }
+    
+    public boolean hasElement(String tag){
+        return elementsCarrying.contains(tag);
     }
     
     public String printPath(){

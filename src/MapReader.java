@@ -37,17 +37,16 @@ public class MapReader{
         depots = new ArrayList<Factory>();
 
         //Populate them with data from 0,0
-        // for(int i = lines.size()-1; i >0; i--){
-        //     char[] line = lines.get(i).toCharArray();
-        //     for(int j = 0; j < line.length;j++){
-        //         if(Character.isUpperCase(line[j])){
-        //             mines.add(new Factory(line[j],Math.abs(i-10),j));
-        //         }else if(Character.isLowerCase(line[j])){
-        //             depots.add(new Factory(line[j],Math.abs(i-10),j));
-        //         }
-        //     }
-
-        // }
+        for(int i = lines.size()-1; i >0; i--){
+            char[] line = lines.get(i).toCharArray();
+            for(int j = 0; j < line.length;j++){
+                if(Character.isUpperCase(line[j])){
+                    mines.add(new Point(line[j],Math.abs(i-10),j));
+                }else if(Character.isLowerCase(line[j])){
+                    depots.add(new Point(line[j],Math.abs(i-10),j));
+                }
+            }
+        }
     }
 
     /**
