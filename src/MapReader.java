@@ -59,3 +59,11 @@ public class MapReader{
         }
     }
 }
+
+public boolean resourcesAvailable(){
+    boolean avail = true;
+    if(minesList.size() == 0 && factoryList.size() == 0){
+        avail = false;
+    }
+    return avail;
+}
