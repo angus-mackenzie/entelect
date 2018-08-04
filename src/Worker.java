@@ -1,6 +1,8 @@
-
 import java.util.ArrayList;
-
+/**
+ * Creates a worker with a name [Miner, Excavator, Hauler]
+ * start position and capacity. You can add/deleted mined elements to these workers
+ */
 
 public class Worker{
     

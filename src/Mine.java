@@ -1,3 +1,6 @@
+/**
+ * A mine is a factory that has resources
+ */
 public class Mine extends Factory{
     public int resources;
 

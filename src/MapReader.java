@@ -2,10 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.*;
 /**
- * @author Angus Mackenzie
- * @version 19:30PM
  * Takes in the path to a map, and reads it in. 
- * Allocating coordinates to each char in the map
  */
 public class MapReader {
     public boolean first = true;
@@ -30,15 +27,14 @@ public class MapReader {
                 String[] firstLine = mapScanner.nextLine().split(" ");
                 mapHeight = Integer.parseInt(firstLine[0]);
                 mapWidth = Integer.parseInt(firstLine[1]);
-                //minerCount = Integer.parseInt(firstLine[2]);
+
+                //create workers
                 for (int i = 0; i < Integer.parseInt(firstLine[2]); i++) {
                     workers.add(new Worker("Miner", startFactory, 1));
                 }
-                //excavatorCount = Integer.parseInt(firstLine[3]);
                 for (int i = 0; i < Integer.parseInt(firstLine[3]); i++) {
                     workers.add(new Worker("Excavator", startFactory, 3));
                 }
-                //haulerCount = Integer.parseInt(firstLine[4]);
                 for (int i = 0; i < Integer.parseInt(firstLine[4]); i++) {
                     workers.add(new Worker("Hauler", startFactory, 5));
                 }

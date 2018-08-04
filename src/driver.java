@@ -6,7 +6,7 @@ public class driver{
     public static void main(String[] args){
         int budget = 0;
         try{
-            MapReader mr = new MapReader("maps/map_5.input");
+            MapReader mr = new MapReader("maps/map_1.input");
             budget -= mr.workers.size();
             while(mr.minesList.size() != 0 || mr.workersHaveResources()){
                 for(Worker worker: mr.workers){
@@ -62,8 +62,7 @@ public class driver{
     }
 
     private static boolean minesHaveResources(ArrayList<Mine> minesList) {
-        for (Mine mine :
-                minesList) {
+        for (Mine mine : minesList) {
             if (mine.resources > 0) {
                 return true;
             }

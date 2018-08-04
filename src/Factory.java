@@ -1,3 +1,6 @@
+/**
+ * A factory has an index, a tag (what kind of element it takes), and coordinates x and y
+ */
 public class Factory{
     public int index;
     public String tag;
