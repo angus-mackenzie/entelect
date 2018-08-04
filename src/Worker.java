@@ -40,7 +40,7 @@ public class Worker{
     }
 
     public void removeElement(String tag){
-        elementsCarrying.remove(tag);
+        elementsCarrying.remove(tag.toUpperCase());
     }
     
     public boolean hasElement(String tag){

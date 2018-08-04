@@ -4,10 +4,17 @@ public class driver{
     public static void main(String[] args){
         try{
             MapReader mr = new MapReader("maps/map_1.input");
-            while(mr.minesList.size()!=0 && mr.workersHaveResources()){
+            while(mr.minesList.size()!=0 || mr.workersHaveResources()){
+                System.out.println(mr.minesList);
                 for(Worker worker: mr.workers){
                     if(worker.path==0) {//need to move to a factory
-                        Factory fact = nearestValid(worker, mr.minesList,mr.factoryList);
+                        Factory fact = nearestValid(worker, mr.minesList,mr.factoryList, mr);
+                        if (fact.getClass().getSimpleName().equals("Mine")) {
+                            ((Mine)fact).resources--;
+                            if (((Mine)fact).resources == 0){
+                                mr.minesList.remove(fact);
+                            }
+                        }
                         worker.moveToFactory(fact);
                     }else if(worker.path==1){//arrived at a factory
                         String tag = worker.currentFactory.tag;
@@ -15,6 +22,7 @@ public class driver{
                             worker.removeElement(tag);
                         }else{
                             worker.addElement(tag);
+
                         }
                     }
                     worker.path--;
@@ -32,21 +40,23 @@ public class driver{
         return dist;
     }
 
-    private static Factory nearestValid(Worker worker, ArrayList<Mine> mines, ArrayList<Factory> factories)
+    private static Factory nearestValid(Worker worker, ArrayList<Mine> mines, ArrayList<Factory> factories, MapReader mr)
     {
         Factory nearest = null;
         int distance = 1000;
         if (worker.hasCapacity()) {
             for (Mine mine: mines) {
-                if (nearest == null) {
-                    nearest = mine;
-                    distance = calculateDistance(worker.currentFactory, mine);
-                    continue;
-                }
-                int newDistance = calculateDistance(worker.currentFactory, mine);
-                if (newDistance < distance) {
-                    nearest = mine;
-                    distance = newDistance;
+                if (! worker.hasElement(mine.tag)) {
+                    if (nearest == null) {
+                        nearest = mine;
+                        distance = calculateDistance(worker.currentFactory, mine);
+                        continue;
+                    }
+                    int newDistance = calculateDistance(worker.currentFactory, mine);
+                    if (newDistance < distance) {
+                        nearest = mine;
+                        distance = newDistance;
+                    }
                 }
             }
         }
@@ -69,6 +79,7 @@ public class driver{
         if (nearest == null) {
             System.out.println("Ya dun goofed");
         }
+
         return nearest;
     }
 

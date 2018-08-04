@@ -5,4 +5,9 @@ public class Mine extends Factory{
         super(index, tag, x, y);
         this.resources = Integer.parseInt(resources);
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + " Resources: " +resources;
+    }
 }

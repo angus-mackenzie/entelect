@@ -35,11 +35,11 @@ public class MapReader {
                     workers.add(new Worker("Miner", startFactory, 1));
                 }
                 //excavatorCount = Integer.parseInt(firstLine[3]);
-                for (int i = 0; i < Integer.parseInt(firstLine[2]); i++) {
+                for (int i = 0; i < Integer.parseInt(firstLine[3]); i++) {
                     workers.add(new Worker("Excavator", startFactory, 3));
                 }
                 //haulerCount = Integer.parseInt(firstLine[4]);
-                for (int i = 0; i < Integer.parseInt(firstLine[2]); i++) {
+                for (int i = 0; i < Integer.parseInt(firstLine[4]); i++) {
                     workers.add(new Worker("Hauler", startFactory, 5));
                 }
                 mines = Integer.parseInt(firstLine[5]);
