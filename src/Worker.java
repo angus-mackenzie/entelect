@@ -49,7 +49,8 @@ public class Worker{
     }
     
     public String printPath(){
-        return pathTravelled.substring(0, pathTravelled.length()-1);
+        String path = workerName.substring(0,1) + "|";
+        return path + pathTravelled.substring(0, pathTravelled.length()-1);
     }
 
     public boolean hasCapacity()

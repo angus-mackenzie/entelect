@@ -3,13 +3,16 @@ import java.util.*;
 public class driver{
     public static void main(String[] args){
         try{
-            MapReader mr = new MapReader("maps/map_1.input");
+            MapReader mr = new MapReader("maps/map_5.input");
             while(mr.minesList.size() != 0 || mr.workersHaveResources()){
-                System.out.println(mr.minesList);
                 for(Worker worker: mr.workers){
                     if (worker.active) {
                         if (worker.path == 0) {//need to move to a factory
                             Factory fact = nearestValid(worker, mr.minesList, mr.factoryList, mr);
+                            if (fact == null) {
+                                worker.active = false;
+                                continue;
+                            }
                             if (fact.getClass().getSimpleName().equals("Mine")) {
                                 ((Mine) fact).resources--;
                                 if (((Mine) fact).resources == 0) {
@@ -29,6 +32,11 @@ public class driver{
                         worker.path--;
                     }
                 }
+            }
+
+            for (Worker worker :
+                    mr.workers) {
+                System.out.println(worker.printPath());
             }
 
         }catch(Exception e){
@@ -86,10 +94,6 @@ public class driver{
                     distance = newDistance;
                 }
             }
-        }
-
-        if (nearest == null) {
-            worker.active = false;
         }
 
         return nearest;
