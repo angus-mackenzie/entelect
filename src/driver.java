@@ -21,32 +21,42 @@ public class driver{
     {
         Factory nearest = null;
         int distance = 1000;
-        for (Mine mine: mines) {
-            if (nearest == null) {
-                nearest = mine;
-                distance = calculateDistance(worker.currentFactory, mine);
-                continue;
-            }
-            int newDistance = calculateDistance(worker.currentFactory, mine);
-            if (newDistance < distance) {
-                nearest = mine;
-                distance = newDistance;
-            }
-        }
-
-        for (Factory factory: factories) {
-            if (nearest == null) {
-                nearest = factory;
-                distance = calculateDistance(worker.currentFactory, factory);
-                continue;
-            }
-            int newDistance = calculateDistance(worker.currentFactory, factory);
-            if (newDistance < distance) {
-                nearest = factory;
-                distance = newDistance;
+        if (worker.hasCapacity()) {
+            for (Mine mine: mines) {
+                if (nearest == null) {
+                    nearest = mine;
+                    distance = calculateDistance(worker.currentFactory, mine);
+                    continue;
+                }
+                int newDistance = calculateDistance(worker.currentFactory, mine);
+                if (newDistance < distance) {
+                    nearest = mine;
+                    distance = newDistance;
+                }
             }
         }
 
+        for (Factory factory : factories) {
+            for (String element :
+                    worker.elementsCarrying) {
+                if (factory.tag.equals(element.toUpperCase())) {
+                    if (nearest == null) {
+                        nearest = factory;
+                        distance = calculateDistance(worker.currentFactory, factory);
+                        continue;
+                    }
+                    int newDistance = calculateDistance(worker.currentFactory, factory);
+                    if (newDistance < distance) {
+                        nearest = factory;
+                        distance = newDistance;
+                    }
+                }
+            }
+        }
+
+        if (nearest == null) {
+            System.out.println("Ya dun goofed");
+        }
         return nearest;
     }
 }
