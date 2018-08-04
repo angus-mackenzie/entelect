@@ -23,7 +23,15 @@ public class MapReader{
         while(mapScanner.hasNext()){
             if(first){
                 //first line
-                numberOfWorkers = mapScanner.nextInt();
+                String[] firstLine = mapScanner.nextLine().split(" ");
+                int mapHeight = firstLine[0];
+                int mapWidth = firstLine[1];
+                int minerCount = firstLine[2];
+                int excavatorCount = firstLine[3];
+                int haulerCount = firstLine[4];
+                int mines = firstLine[5];
+                int facts = firstLine[6];
+                int budget = firstLine[7];
                 first = false;
             }else{
                 //otherwise add it to the array of lines
