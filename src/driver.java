@@ -3,11 +3,21 @@ import java.io.FileWriter;
 import java.util.*;
 
 public class driver{
+    private static HashMap<String, List<Factory>> factHash;
     public static void main(String[] args){
         int budget = 0;
+
         try{
-            MapReader mr = new MapReader("maps/map_5.input");
+            MapReader mr = new MapReader("maps/map_1.input");
             budget -= mr.workers.size();
+            factHash = new HashMap<>();
+            for (Factory fact :  mr.factoryList) {
+                List<Factory> list = factHash.get(fact.tag);
+                if (list == null) {list = new ArrayList<>();}
+                list.add(fact);
+                factHash.put(fact.tag, list);
+            }
+
             while(mr.minesList.size() != 0 || mr.workersHaveResources()){
                 for(Worker worker: mr.workers){
                     if (worker.active) {
@@ -40,6 +50,9 @@ public class driver{
                             }
 
                             // Sets destination
+                            System.out.println(mr.minesList);
+                            System.out.println(mr.workers);
+                            System.out.println("moving " + mr.workers.indexOf(worker) + " to " + fact.index);
                             worker.moveToFactory(fact);
                         }
                         worker.path--;
@@ -47,7 +60,7 @@ public class driver{
                 }
             }
 
-            BufferedWriter writer = new BufferedWriter(new FileWriter("map5_result.txt"));
+            BufferedWriter writer = new BufferedWriter(new FileWriter("map1_result.txt"));
             for (Worker worker :
                     mr.workers) {
                 writer.write(worker.printPath() + "\n");
@@ -78,20 +91,43 @@ public class driver{
 
     private static Factory nearestValid(Worker worker, ArrayList<Mine> mines, ArrayList<Factory> factories, MapReader mr)
     {
-        Factory nearest = null;
-        int distance = 1000;
+        Factory one = null;
+        int oneToFac = -1;
+        Factory two = null;
+        int twoToFac = -1;
+        Factory three = null;
+        int threeToFac = -1;
+
+        // Valid mines
         if (worker.hasCapacity()) {
             for (Mine mine: mines) {
                 if (! worker.hasElement(mine.tag) && mine.resources > 0) {
-                    if (nearest == null) {
-                        nearest = mine;
-                        distance = calculateDistance(worker.currentFactory, mine);
+                    // first thing
+                    if (one == null) {
+                        one = mine;
                         continue;
                     }
-                    int newDistance = calculateDistance(worker.currentFactory, mine);
-                    if (newDistance < distance) {
-                        nearest = mine;
-                        distance = newDistance;
+
+                    if (two == null) {
+                        two = mine;
+                        continue;
+                    }
+
+                    if (three == null) {
+                        three = mine;
+                        continue;
+                    }
+
+                    if (calculateDistance(worker.currentFactory, mine) < calculateDistance(worker.currentFactory, one)) {
+                        one = mine;
+                        break;
+                    }
+                    if (calculateDistance(worker.currentFactory, mine) < calculateDistance(worker.currentFactory, two)) {
+                        two = mine;
+                        break;
+                    }
+                    if (calculateDistance(worker.currentFactory, mine) < calculateDistance(worker.currentFactory, three)) {
+                        three = mine;
                     }
                 }
             }
@@ -99,20 +135,92 @@ public class driver{
 
         for (Factory factory : factories) {
             if (worker.hasElement(factory.tag.toUpperCase())) {
-                if (nearest == null) {
-                    nearest = factory;
-                    distance = calculateDistance(worker.currentFactory, factory);
+                // first thing
+                if (one == null) {
+                    one = factory;
                     continue;
                 }
-                int newDistance = calculateDistance(worker.currentFactory, factory);
-                if (newDistance < distance) {
-                    nearest = factory;
-                    distance = newDistance;
+
+                if (two == null) {
+                    two = factory;
+                    continue;
+                }
+
+                if (three == null) {
+                    three = factory;
+                    continue;
+                }
+
+                if (calculateDistance(worker.currentFactory, factory) < calculateDistance(worker.currentFactory, one)) {
+                    one = factory;
+                    break;
+                }
+                if (calculateDistance(worker.currentFactory, factory) < calculateDistance(worker.currentFactory, two)) {
+                    two = factory;
+                    break;
+                }
+                if (calculateDistance(worker.currentFactory, factory) < calculateDistance(worker.currentFactory, three)) {
+                    three = factory;
                 }
             }
         }
 
-        return nearest;
+        if (one.getClass().getSimpleName().equals("Factory")) {
+            List<Factory> list= factHash.get(one.tag);
+            for (Factory fac : list) {
+                if (oneToFac == -1) {
+                    oneToFac = calculateDistance(one, fac);
+                }
+
+                if (calculateDistance(one, fac) < oneToFac) {
+                    oneToFac = calculateDistance(one, fac);
+                }
+            }
+        }
+
+        if (two != null && two.getClass().getSimpleName().equals("Factory")) {
+            List<Factory> list= factHash.get(two.tag);
+            for (Factory fac : list) {
+                if (twoToFac == -1) {
+                    twoToFac = calculateDistance(two, fac);
+                }
+
+                if (calculateDistance(two, fac) < twoToFac) {
+                    twoToFac = calculateDistance(two, fac);
+                }
+            }
+        }
+
+        if (three != null && three.getClass().getSimpleName().equals("Factory")) {
+            List<Factory> list= factHash.get(three.tag);
+            for (Factory fac : list) {
+                if (threeToFac == -1) {
+                    threeToFac = calculateDistance(three, fac);
+                }
+
+                if (calculateDistance(three, fac) < threeToFac) {
+                    threeToFac = calculateDistance(three, fac);
+                }
+            }
+        }
+
+        if (oneToFac == -1) {
+            return one;
+        }
+
+        if ((oneToFac < twoToFac && twoToFac != -1) && (oneToFac < threeToFac && threeToFac != -1)) {
+            return one;
+        }
+
+        if ((twoToFac < oneToFac) && (twoToFac < threeToFac && threeToFac != -1)) {
+            return two;
+        }
+
+        if ((threeToFac < oneToFac) && (threeToFac < twoToFac && twoToFac != -1)) {
+            return three;
+        }
+
+        return one;
     }
 
     static boolean lowercase(String tag){

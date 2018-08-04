@@ -57,4 +57,9 @@ public class Worker{
     {
         return carryCapacity > elementsCarrying.size();
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + " at: " + currentFactory.index + " Bag: " + elementsCarrying;
+    }
 }
