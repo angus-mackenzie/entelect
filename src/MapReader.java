@@ -64,4 +64,13 @@ public class MapReader{
             }
         }
     }
+
+    public boolean workersHaveResources(){
+        for(Worker work : workers){
+            if(work.elementsCarrying.size()!=0){
+                return true;
+            }
+        }
+        return false;
+    }
 }
