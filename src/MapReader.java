@@ -7,17 +7,11 @@ import java.io.*;
  * Takes in the path to a map, and reads it in. 
  * Allocating coordinates to each char in the map
  */
-public class MapReader{
+public class MapReader {
     public boolean first = true;
     public int mapHeight = 0;
     public int mapWidth = 0;
 
-    //public int minerCount = 0;
-        //public ArrayList<Worker> miners;
-    //public int excavatorCount = 0;
-        //public ArrayList<Worker> excavators;
-    //public int haulerCount = 0;
-        //public ArrayList<Worker> haulers;
     public ArrayList<Worker> workers = new ArrayList<>();
 
     public int mines = 0;
@@ -27,11 +21,11 @@ public class MapReader{
     public ArrayList<Mine> minesList = new ArrayList<>();
     public ArrayList<Factory> factoryList = new ArrayList<>();
 
-    public MapReader(String mapFileName) throws Exception{
+    public MapReader(String mapFileName) throws Exception {
         Scanner mapScanner = new Scanner(new File(mapFileName));
         Factory startFactory = new Factory();
-        while(mapScanner.hasNext()){
-            if(first){
+        while (mapScanner.hasNext()) {
+            if (first) {
                 //first line
                 String[] firstLine = mapScanner.nextLine().split(" ");
                 mapHeight = Integer.parseInt(firstLine[0]);
@@ -52,7 +46,7 @@ public class MapReader{
                 facts = Integer.parseInt(firstLine[6]);
                 budget = Long.parseLong(firstLine[7]);
                 first = false;
-            }else{
+            } else {
                 String[] line = mapScanner.nextLine().split(" ");
                 if (line.length == 5) {
                     // Mine
@@ -65,12 +59,20 @@ public class MapReader{
         }
     }
 
-    public boolean workersHaveResources(){
-        for(Worker work : workers){
-            if(work.elementsCarrying.size()!=0){
+    public boolean workersHaveResources() {
+        for (Worker work : workers) {
+            if (work.elementsCarrying.size() != 0) {
                 return true;
             }
         }
         return false;
+    }
+
+    public boolean resourcesAvailable() {
+        boolean avail = true;
+        if (minesList.size() == 0 && factoryList.size() == 0) {
+            avail = false;
+        }
+        return avail;
     }
 }
