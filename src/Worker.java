@@ -5,30 +5,30 @@ import java.util.ArrayList;
 public class Worker{
     
     int distanceTravelled;
-    Point currentPoint;
+    Factory currentFactory;
     String pathTravelled;
     String workerName ="";
-    int capacity;
+
     ArrayList<String> elementsCarrying;
 
-    public Worker(String name, Point start, int carryCapacity){
+    public Worker(String name, Factory start){
         workerName = name;
         distanceTravelled = 0;
-        currentPoint = start;
+        currentFactory = start;
         pathTravelled = "";
         capacity = carryCapacity;
 
         elementsCarrying = new ArrayList<String>();
     }
 
-    public void moveToPoint(Point dest){
-        System.out.println(workerName+": "+currentPoint.id+"->"+dest.id+"  "+distanceTravelled);
-        distanceTravelled += calculateDistance(currentPoint, dest);
-        currentPoint = dest;
+    public void moveToFactory(Factory dest){
+        System.out.println(workerName+": "+currentFactory.id+"->"+dest.id+"  "+distanceTravelled);
+        distanceTravelled += calculateDistance(currentFactory, dest);
+        currentFactory = dest;
         pathTravelled += dest.id + ",";
     }
     
-    public int calculateDistance (Point origin, Point dest){
+    public int calculateDistance (Factory origin, Factory dest){
         int dist = (int)(Math.abs(origin.getX() - dest.getX()) + Math.abs(origin.getY() - dest.getY()));
         return dist;
     }

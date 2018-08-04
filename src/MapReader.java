@@ -8,71 +8,44 @@ import java.io.*;
  * Allocating coordinates to each char in the map
  */
 public class MapReader{
-    int dimensions = 0;
-    int numberOfWorkers = 0;
-    String map ="";
-    boolean first = true;
-    /**
-     * @param String the filename of the map
-     */
-    ArrayList<String> lines = new ArrayList<String>();
-    ArrayList<Point> mines;// = new ArrayList[][]();
-    ArrayList<Point> depots;// = new ArrayList[][]();
+    public boolean first = true;
+    public int mapHeight = 0;
+    public int mapWidth = 0;
+    public int minerCount = 0;
+    public int excavatorCount = 0;
+    public int haulerCount = 0;
+    public int mines = 0;
+    public int facts = 0;
+    public int budget = 0;
+
+    public ArrayList<Mine> minesList = new ArrayList<>();
+    public ArrayList<Factory> factoryList = new ArrayList<>();
+
     public MapReader(String mapFileName) throws Exception{
         Scanner mapScanner = new Scanner(new File(mapFileName));
         while(mapScanner.hasNext()){
             if(first){
                 //first line
-                numberOfWorkers = mapScanner.nextInt();
+                String[] firstLine = mapScanner.nextLine().split(" ");
+                mapHeight = Integer.parseInt(firstLine[0]);
+                mapWidth = Integer.parseInt(firstLine[1]);
+                minerCount = Integer.parseInt(firstLine[2]);
+                excavatorCount = Integer.parseInt(firstLine[3]);
+                haulerCount = Integer.parseInt(firstLine[4]);
+                mines = Integer.parseInt(firstLine[5]);
+                facts = Integer.parseInt(firstLine[6]);
+                budget = Integer.parseInt(firstLine[7]);
                 first = false;
             }else{
-                //otherwise add it to the array of lines
-                lines.add(mapScanner.nextLine());
-                dimensions++;
-                
-            }
-        }
-        //create arrays for mines and epots
-        mines = new ArrayList<Point>();
-        depots = new ArrayList<Point>();
-
-        //Populate them with data from 0,0
-        for(int i = lines.size()-1; i >0; i--){
-            char[] line = lines.get(i).toCharArray();
-            for(int j = 0; j < line.length;j++){
-                if(Character.isUpperCase(line[j])){
-                    mines.add(new Point(line[j],Math.abs(i-10),j));
-                }else if(Character.isLowerCase(line[j])){
-                    depots.add(new Point(line[j],Math.abs(i-10),j));
+                String[] line = mapScanner.nextLine().split(" ");
+                if (line.length == 5) {
+                    // Mine
+                    minesList.add(new Mine(line[0], line[1], line[2], line[3], line[4]));
+                } else {
+                    // Factory
+                    factoryList.add(new Factory(line[0], line[1], line[2], line[3]));
                 }
             }
         }
-    }
-
-    /**
-     * return the dimensions of the map
-     */
-    public int getDimensions(){
-        return dimensions;
-    }
-    /**
-     * returns the mines in an arrayList
-     */
-    public ArrayList<Point> getMines(){
-        return mines;
-    }
-
-    /**
-     * returns the depots 
-     */
-    public ArrayList<Point> getDepots(){
-        return depots;
-    }
-
-    /**
-     * return the number of workers specified
-     */
-    public int getNumberOfWorkers(){
-        return numberOfWorkers;
     }
 }
