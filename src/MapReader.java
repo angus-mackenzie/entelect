@@ -16,7 +16,7 @@ public class MapReader{
     public int haulerCount = 0;
     public int mines = 0;
     public int facts = 0;
-    public int budget = 0;
+    public long budget = 0;
 
     public ArrayList<Mine> minesList = new ArrayList<>();
     public ArrayList<Factory> factoryList = new ArrayList<>();
@@ -34,7 +34,7 @@ public class MapReader{
                 haulerCount = Integer.parseInt(firstLine[4]);
                 mines = Integer.parseInt(firstLine[5]);
                 facts = Integer.parseInt(firstLine[6]);
-                budget = Integer.parseInt(firstLine[7]);
+                budget = Long.parseLong(firstLine[7]);
                 first = false;
             }else{
                 String[] line = mapScanner.nextLine().split(" ");
