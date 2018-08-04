@@ -46,7 +46,6 @@ public class MapReader{
                     depots.add(new Point(line[j],Math.abs(i-10),j));
                 }
             }
-
         }
     }
 
