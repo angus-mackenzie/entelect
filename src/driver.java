@@ -37,19 +37,16 @@ public class driver{
         }
 
         for (Factory factory : factories) {
-            for (String element :
-                    worker.elementsCarrying) {
-                if (factory.tag.equals(element.toUpperCase())) {
-                    if (nearest == null) {
-                        nearest = factory;
-                        distance = calculateDistance(worker.currentFactory, factory);
-                        continue;
-                    }
-                    int newDistance = calculateDistance(worker.currentFactory, factory);
-                    if (newDistance < distance) {
-                        nearest = factory;
-                        distance = newDistance;
-                    }
+            if (worker.hasElement(factory.tag.toUpperCase())) {
+                if (nearest == null) {
+                    nearest = factory;
+                    distance = calculateDistance(worker.currentFactory, factory);
+                    continue;
+                }
+                int newDistance = calculateDistance(worker.currentFactory, factory);
+                if (newDistance < distance) {
+                    nearest = factory;
+                    distance = newDistance;
                 }
             }
         }
