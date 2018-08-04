@@ -12,6 +12,8 @@ We took part in the Entelect University Cup, and came in the top 10! It was a re
 ### Details
 * Saturday 4th August
 * 8:30-15:00
+
+
 [Practice Problem](/practice/README.md)
 # Main Challenge
 ## Problem Description
